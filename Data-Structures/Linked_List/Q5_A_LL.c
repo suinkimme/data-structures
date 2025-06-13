@@ -117,16 +117,18 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 
 	if (ll == NULL || ll->size == 0) return;
 
-	ListNode *current = ll->head;
+	ListNode *current = ll->head; // 순회하기 전에 head를 지정함
 
-	int frontSize = (ll->size % 2 == 0) ? ll->size / 2 : (ll->size / 2 + 1);
-	int backSize = ll->size - frontSize;
+	int frontSize = (ll->size % 2 == 0) ? ll->size / 2 : (ll->size / 2 + 1); // 연결 리스트의 총 길이가 홀수일 경우 중간 값을 front에 포함하기 위해 +1 함
+	int backSize = ll->size - frontSize; // 총 길이에서 front 길이 만큼 제거하면 나머지 길이를 알아낼 수 있음
 
+	// resultFrontList에 현재 current의 값을 삽입함
 	for (int i = 0; i < frontSize; i++) {
 		insertNode(resultFrontList, resultFrontList->size, current->item);
 		current = current->next;
 	}
 
+	// resultBackList에 현재 current의 값을 삽입함
 	for (int i = 0; i < backSize; i++) {
 		insertNode(resultBackList, resultBackList->size, current->item);
 		current = current->next;
