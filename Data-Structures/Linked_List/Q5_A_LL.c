@@ -117,20 +117,19 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 
 	if (ll == NULL || ll->size == 0) return;
 
-	ListNode *cur = ll->head;
+	ListNode *current = ll->head;
 
-	int i;
 	int frontSize = (ll->size % 2 == 0) ? ll->size / 2 : (ll->size / 2 + 1);
 	int backSize = ll->size - frontSize;
 
-	for (i = 0; i < frontSize; i++) {
-		insertNode(resultFrontList, resultFrontList->size, cur->item);
-		cur = cur->next;
+	for (int i = 0; i < frontSize; i++) {
+		insertNode(resultFrontList, resultFrontList->size, current->item);
+		current = current->next;
 	}
 
-	for (i = 0; i < backSize; i++) {
-		insertNode(resultBackList, resultBackList->size, cur->item);
-		cur = cur->next;
+	for (int i = 0; i < backSize; i++) {
+		insertNode(resultBackList, resultBackList->size, current->item);
+		current = current->next;
 	}
 }
 
