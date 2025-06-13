@@ -85,9 +85,33 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
+// li.head의 주소를 받기 때문에 원본을 참조하기 위해 **를 사용함
+// *ptrHead는 현재 head 노드 (주소가 가르키는 값)
+// **ptrHead는 그 노드의 실제 값
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	// 종료 조건
+	// 리스트가 비어있거나 노드가 하나뿐이면 더 이상 뒤집을 게 없으니까 종료함
+	if (*ptrHead == NULL || (*ptrHead)->next == NULL)
+			return;
+
+	// 현재 head 노드를 first에 저장함
+	ListNode *first = *ptrHead;
+	// 남은 리스트들 (재귀로 뒤집을 대상)
+	ListNode *rest = first->next;
+
+	// 남은 리스트 재귀 반복함
+	RecursiveReverse(&rest);
+
+	// 현재 노드 first 뒤에 있었던 노드(first->next)의 next를 거꾸로 first로 향하게 설정
+	// 나 다음의 노드의 next를 나로 바꾸는거임
+	// 걍 방향을 바꾼다고 보면 됨
+	first->next->next = first;
+	// first의 다음 노드를 끊음 이거 안하면 사이클 생김
+	first->next = NULL;
+
+	// 새롭게 뒤집힌 리스트의 head(rest)를 *ptrHead 즉 ll.head에 할당
+	*ptrHead = rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
