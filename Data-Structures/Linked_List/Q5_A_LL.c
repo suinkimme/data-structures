@@ -39,6 +39,7 @@ int removeNode(LinkedList *ll, int index);
 int main()
 {
 	int c, i;
+	c = 1;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -60,7 +61,7 @@ int main()
 
 	while (c != 0)
 	{
-	    printf("Please input your choice(1/2/0): ");
+	  printf("Please input your choice(1/2/0): ");
 		scanf("%d", &c);
 
 		switch (c)
@@ -100,9 +101,37 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+// 리스트를 앞/뒤 절반으로 나누는 함수다.
+// 홀수 개의 노드가 있따면, 가운데 노드는 앞 리스트에 포함된다.
+
+// 예시)
+// 입력: 2, 3, 5, 6, 7
+// 출력: fontList: 2, 3, 5
+//      backList: 6, 7
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	// ll가 연결리스트고
+	// 자른 후에
+	// resultFrontList 주소에 시작 주소 넣어주고
+	// resultBackList 주소에 시작 주소 넣어주면 될듯?
+
+	if (ll == NULL || ll->size == 0) return;
+
+	ListNode *cur = ll->head;
+
+	int i;
+	int frontSize = (ll->size % 2 == 0) ? ll->size / 2 : (ll->size / 2 + 1);
+	int backSize = ll->size - frontSize;
+
+	for (i = 0; i < frontSize; i++) {
+		insertNode(resultFrontList, resultFrontList->size, cur->item);
+		cur = cur->next;
+	}
+
+	for (i = 0; i < backSize; i++) {
+		insertNode(resultBackList, resultBackList->size, cur->item);
+		cur = cur->next;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
