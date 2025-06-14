@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MIN_INT -1000
 
@@ -104,7 +105,28 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	Stack temp;
+	temp.ll.head = NULL;
+	temp.ll.size = 0;
+
+	int length = strlen(expression);
+	for (int i = 0; i < length; i++) {
+		if (expression[i] == '{' || expression[i] == '[' || expression[i] == '(') {
+			push(&temp, 1);
+			temp.ll.size++;
+		}
+
+		if (expression[i] == '}' || expression[i] == ']' || expression[i] == ')') {
+			pop(&temp);
+			temp.ll.size--;
+		}
+	}
+
+	if (temp.ll.size == 0) {
+		return 0;
+	} else {
+		return 1;
+	}
 }
 
 ////////////////////////////////////////////////////////////
