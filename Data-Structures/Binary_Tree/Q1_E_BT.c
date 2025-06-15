@@ -126,10 +126,12 @@ int identical(BTNode *tree1, BTNode *tree2)
         return 0;
     }
 
+    // 루트 트리가 같은지 확인
     if (tree1->item != tree2->item) {
         return 0;
     }
 
+    // 나머지는 재귀 요정한테 맡겨버림ㅋ
     return identical(tree1->left, tree2->left) && identical(tree1->right, tree2->right);
 }
 
