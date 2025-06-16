@@ -114,9 +114,6 @@ void recursiveReverse(Queue *q)
 	}
 
 	int item = dequeue(q);
-	if (item == -1) {
-		return;
-	}
 
 	recursiveReverse(q);
 
