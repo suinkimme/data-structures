@@ -91,7 +91,39 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) {
+		return;
+	}
+
+	Stack s;
+	s.top = NULL;
+	BSTNode *current = root;
+	BSTNode *lastVisited = NULL;
+
+	push(&s, current);
+	while (!isEmpty(&s)) {
+		BSTNode *peekNode = peek(&s);
+
+		// 왼쪽 자식이 있고 아직 방문한 적 없을 때
+		// 자식들을 다 방문 했는지 확인하는 거임
+		if (peekNode->left != NULL && lastVisited != peekNode->left && lastVisited != peekNode->right) {
+			current = peekNode->left;
+			push(&s, current);
+		// 오른쪽 자식이 있고 아직 방문한 적 없을 때
+		} else if (peekNode->right != NULL && lastVisited != peekNode->right) {
+			current = peekNode->right;
+			push(&s, current);
+		// 왼쪽 오른쪽 둘 다 없거나 이미 방문했을 때
+		} else {
+			printf("%d ", peekNode->item);
+			lastVisited = pop(&s);
+		}
+	}
+
+	/**
+	 * 자식이 있는지 확인하고 왼쪽 자식이 있다면 왼쪽으로 이동하고 방문 표기 그리고 오른쪽 자식에 방문 안했다면 오른쪽에 방문후 방문 표기 그리고 모두 방문했다면 루트 노드를 pop하고 출력 그리고 방문 표기(상위 노드로 갔을 때 얘가 다시 추가되는걸 방지하기 위함)
+	 * -> 지피티가 완.전.히.맞.아 라고 대답함ㅋㅋ ㅅㄱㅇ
+	 */
 }
 
 ///////////////////////////////////////////////////////////////////////////////
